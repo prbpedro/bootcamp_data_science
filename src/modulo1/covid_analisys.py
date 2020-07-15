@@ -50,15 +50,34 @@ def preprocess(dataframe):
     #dataframe["lat"] = dataframe['Country/Region'].apply(getlat)
     #dataframe["long"] = dataframe['Country/Region'].apply(getlong)
     dataframe.dropna(inplace=True)
+    
+def plotlinechartcountrycomparison(dataframe, countrys):
+    #dfplot = dataframe[dataframe['Country/Region'] == 'China']
+    dfplot = dataframe
+    dfplot = dfplot.groupby(['Country/Region', 'ObservationDate']).sum()
+    dfplot.fillna(0, inplace=True)
+    dfplot.drop(['SNo'], axis=1, inplace=True)
+    f = plt.figure()
+    plt.ticklabel_format(style = 'plain')
+    plt.title('Confirmed covid-19 evolution in ' + str(countrys))
+    ax = f.gca()
+    allc = dfplot.index.levels[0].unique()
+    for c in allc :
+        if c in countrys:
+            data = dfplot.iloc[dfplot.index.get_level_values(0) == c]
+            datau = data.unstack(level=0)
+            datau.plot.line(y='Confirmed', ax=ax)
+    ax.xaxis.set_major_locator(mdates.MonthLocator())
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+    ax.set_xlabel('')
 
-
-def plotlinechart(dataframe):
-    dfplot = dataframe[dataframe['Country/Region'] == 'China']
+def plotlinechartpercountry(dataframe, country):
+    dfplot = dataframe[dataframe['Country/Region'] == country]
     dfplot = dfplot.groupby(['ObservationDate']).sum()
     dfplot.drop(['SNo'], axis=1, inplace=True)
     f = plt.figure()
     plt.ticklabel_format(style = 'plain')
-    plt.title('covid-19 evolution')
+    plt.title('covid-19 evolution in ' + country)
     ax = f.gca()
     dfplot.plot(kind='line', ax=ax)
     ax.xaxis.set_major_locator(mdates.MonthLocator())
@@ -69,5 +88,11 @@ caminho_base='/home/prbpedro/Development/repositories/github/bootcamp_data_scien
 dataframe=pd.read_csv(caminho_base + 'covid_19_data.csv')
 
 preprocess(dataframe)
-plotlinechart(dataframe)
+
+plotlinechartpercountry(dataframe, 'China')
+plotlinechartpercountry(dataframe, 'Brazil')
+plotlinechartpercountry(dataframe, 'Portugal')
+plotlinechartpercountry(dataframe, 'US')
+
+plotlinechartcountrycomparison(dataframe, ['China', 'Brazil', 'Portugal', 'US'])
 dataframe.info()
