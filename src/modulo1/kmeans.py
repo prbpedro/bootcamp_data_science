@@ -3,10 +3,6 @@ from matplotlib import pyplot as plt
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 
-X, y = make_blobs(n_samples=500, centers=20, random_state=999)
-plt.scatter(X[:,0], X[:,1])
-plt.show()
-
 def optimal_number_of_clusters(wcss):
     x1, y1 = 1, wcss[0]
     x2, y2 = 19, wcss[len(wcss)-1]
@@ -20,22 +16,26 @@ def optimal_number_of_clusters(wcss):
     
     return distances.index(max(distances)) + 1
 
+X, y = make_blobs(n_samples=500, centers=20, random_state=999)
+plt.scatter(X[:,0], X[:,1])
+plt.grid()
+plt.show()
+
 wcss = []
 for i in range(1, 20):
     kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=300, n_init=10)
-    kmeans.fit(X)
+    y_kmeans = kmeans.fit_predict(X)
+    print(i, kmeans.cluster_centers_, sep="\n", end="\n\n")
     wcss.append(kmeans.inertia_)
+    plt.scatter(X[:,0], X[:,1], c=y_kmeans)
+    plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], s=70, c="red")
+    plt.grid()
+    plt.show()
+    
 n = optimal_number_of_clusters(wcss)
 print(n)
-
-wcss = []
-kmeans = KMeans(n_clusters=5, init='k-means++', max_iter=300, n_init=10)
-kmeans.fit(X)
-wcss.append(kmeans.inertia_)
-print(i, kmeans.cluster_centers_, sep="|")
     
-plt.plot(range(1, 1), wcss)
-plt.plot([1, 1],[wcss[0], wcss[len(wcss)-1]])
+plt.plot(range(1, 20), wcss)
 plt.title('Elbow Method')
 plt.xlabel('Number of clusters')
 plt.ylabel('WCSS')
