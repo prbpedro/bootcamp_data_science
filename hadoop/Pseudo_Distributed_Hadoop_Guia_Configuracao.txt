@@ -1,0 +1,26 @@
+Pseudo-Distributed Hadoop - Guia de configuração:
+
+1) Baixar a versão mais atual do hadoop
+https://hadoop.apache.org/releases.html
+
+2) Configurar máquina para aceitar conexões ssh do localhost sem senhae instalar o pacote pdsh
+https://stackoverflow.com/questions/28727969/setting-ssh-access-to-localhost
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Setup_passphraseless_ssh
+
+3) Configurar variáveis de ambiente no bashrc
+
+	#JAVA
+	export JAVA_HOME=/usr/lib/jvm/jdk-8u261-linux-x64/jdk1.8.0_261
+	export PATH="$PATH:$JAVA_HOME/bin"
+
+	#HADOOP ENVIRONMENT
+	export HADOOP_HOME="/home/prbpedro/Development/apps/hadoop-3.3.0"
+	export HADOOP_INSTALL=$HADOOP_HOME
+	export HADOOP_MAPRED_HOME=$HADOOP_HOME
+	export HADOOP_COMMON_HOME=$HADOOP_HOME
+	export HADOOP_HDFS_HOME=$HADOOP_HOME
+	export YARN_HOME=$HADOOP_HOME
+	export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+	export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+
+4) Configurar arquivos contidos no subdiretório config deste guia
