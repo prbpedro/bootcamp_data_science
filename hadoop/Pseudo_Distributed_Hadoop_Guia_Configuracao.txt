@@ -26,6 +26,10 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCl
 4) Configurar arquivos contidos no subdiretório config deste guia
 
 5) Formatar o namenode 
+	Obs.: Erro -> Resolução
+		Starting namenodes on [localhost]
+		pdsh@shaft: localhost: ssh exited with exit code 1
+
 	hdfs namenode -format
 
 6) Checagem das bibliotecas nativas
