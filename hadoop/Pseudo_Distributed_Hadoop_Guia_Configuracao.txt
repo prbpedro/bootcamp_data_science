@@ -25,15 +25,18 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCl
 
 4) Configurar arquivos contidos no subdiretório config deste guia
 
-5) Checagem das bibliotecas nativas
+5) Formatar o namenode 
+	hdfs namenode -format
+
+6) Checagem das bibliotecas nativas
 	hadoop checknative -a
 
-6) Start/Stop dos serviços Hadoop
+7) Start/Stop dos serviços Hadoop
 	start-all.sh
 	stop-all.sh
 	
-7) Checagem dos serviços em execução 
+8) Checagem dos serviços em execução 
 	jps
 
-8) Hadoop Overview
+9) Hadoop Overview
 	http://localhost:9870/
