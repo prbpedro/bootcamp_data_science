@@ -26,4 +26,10 @@
         	<name>dfs.safemode.threshold.pct</name>
         	<value>0</value>
     	</property>
+
+	<property>
+        	<name>dfs.namenode.name.dir</name>
+        	<value>/home/prbpedro/Development/apps/hadoop-3.3.0/hdsf</value>
+    	</property>
+
 </configuration>

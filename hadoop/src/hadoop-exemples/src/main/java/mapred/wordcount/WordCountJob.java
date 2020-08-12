@@ -8,6 +8,7 @@ import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
 import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.JobStatus;
 import org.apache.hadoop.mapred.RunningJob;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
@@ -37,6 +38,6 @@ public class WordCountJob extends Configured implements Tool{
 	    RunningJob rjob = JobClient.runJob(jobConf);
 	    rjob.waitForCompletion();
 	    
-	    return rjob.getJobState() == 2 ? 0 : 1 ;
+	    return rjob.getJobState() == JobStatus.SUCCEEDED ? 0 : 1 ;
 	}
 }
