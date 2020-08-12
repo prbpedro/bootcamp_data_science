@@ -31,6 +31,7 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCl
 		pdsh@shaft: localhost: ssh exited with exit code 1
 
 	hdfs namenode -format
+	chmod -R 755 Development/apps/hadoop-3.3.0/hdsf/
 
 6) Checagem das bibliotecas nativas
 	hadoop checknative -a

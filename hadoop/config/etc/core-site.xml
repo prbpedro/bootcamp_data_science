@@ -19,7 +19,7 @@
 <configuration>
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/tmp/hadoop-prbpedro</value>
+		<value>/home/prbpedro/Development/apps/hadoop-3.3.0/hdsf/</value>
 	</property>
 	<property>
 		<name>fs.defaultFS</name>
