@@ -1,1 +1,3 @@
 *.sh linguist-detectable=false
+*.java linguist-detectable=true
+*.py linguist-detectable=true
