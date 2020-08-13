@@ -1,0 +1,32 @@
+1) Download e extract
+	http://ftp.unicamp.br/pub/apache/hive/hive-3.1.2/
+
+2) Configurar variáveis de ambiente no .bashrc
+	#HIVE ENVIRONMENT
+	export HIVE_HOME="/home/prbpedro/Development/apps/apache-hive-3.1.2-bin"
+	export PATH=$PATH:$HIVE_HOME/bin
+
+3) Configurar arquivos nas pastas bin e conf
+
+4) Criar diretórios do hive no hdfs
+	hdfs dfs -mkdir /tmp
+	hdfs dfs -chmod g+w /tmp
+	hdfs dfs -mkdir -p /user/hive/warehouse
+	hdfs dfs -chmod g+w /user/hive/warehouse
+
+5) Atualizar biblioteca guava do hive com a do hadoop
+	rm $HIVE_HOME/lib/guava-19.0.jar
+	cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-27.0-jre.jar $HIVE_HOME/lib/
+
+6) Remover jar s4jl do hive
+	rm /home/prbpedro/Development/apps/apache-hive-3.1.2-bin/lib/log4j-slf4j-impl-2.10.0.jar
+
+7) Iniciar a base de dados derby do hive
+	schematool -dbType derby -initSchema
+
+8) Executar o hive
+	hive
+
+
+
+Ref: https://phoenixnap.com/kb/install-hive-on-ubuntu
