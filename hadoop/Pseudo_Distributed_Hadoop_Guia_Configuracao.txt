@@ -45,3 +45,4 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCl
 
 9) Hadoop Overview
 	http://localhost:9870/
+	http://localhost:8088/
