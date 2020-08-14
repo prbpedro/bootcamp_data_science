@@ -1,60 +1,29 @@
-1) Download hbase from https://hbase.apache.org/ (1.2.1)
+1) Download 
+	https://hbase.apache.org/
 
-2) untar and move to a convenient location. Rename the extracted folder to HBase
+2) Atualizar arquivos de configuraçãoconf/hbase-env.sh conf/hbase-site.xml
 
-3) In HBase/conf/hbase-site.xml, add the following in between the configuration tags
+3) update .bash_profile on Mac/.bashrc on Linux
+	export HBASE_HOME=/home/prbpedro/Development/repositories/github/bootcamp_data_science/hbase
+	export PATH="$HBASE_HOME/bin:$PATH"
 
-<property>
-   <name>hbase.cluster.distributed</name>
-   <value>true</value>
-</property>
+4) Start HBase
+	start-hbase.sh
 
-<property>
-   <name>hbase.rootdir</name>
-   <value>hdfs://localhost:9000/hbase</value>
-</property>
+5) web interface 
+	http://localhost:16010
 
+6) Start HBase shell 
+	hbase shell 
 
-	<property>
-      <name>hbase.zookeeper.property.dataDir</name>
-      <value><Any Directory>/zookeeper</value>
-   </property>
+7) Executar comandos
+	hbase(main):001:0> status
+	hbase(main):003:0> list
+	hbase(main):009:0> exit
 
-4) In HBase/conf/hbase-env.sh 
-Update JAVA_HOME 
-On Macs : export JAVA_HOME=$(/usr/libexec/java_home)
-On Linux machines: Google for the Java home directory for your Linux and Java versions
-
-5) update .bash_profile on Mac/.bashrc on Linux
-export HBASE_HOME=$HOME/HBase
-export PATH="$HBASE_HOME/bin:$PATH"
-
-6) Start HBase
-
-> cd $HBASE_HOME
->./bin/start-hbase.sh
->./bin/local-master-backup.sh start 2
-> ./bin/./local-regionservers.sh start 3
-
-Check the web interface at 
-http://localhost:16010
-
-7) Start HBase shell 
-> hbase shell 
-
-8) Try the following commands 
-
-hbase(main):001:0> status
-hbase(main):003:0> list
-hbase(main):004:0> create 'Sales','Transactions'
-hbase(main):006:0> put 'Sales','1','Transactions:Date','20160501'
-hbase(main):007:0> put 'Sales','1','Transactions:Amount','3000'
-hbase(main):008:0> scan 'Sales'
-hbase(main):009:0> exit
-
-9) Stopping HBase
-$ cat /tmp/hbase-prbpedro-master.pid|xargs kill -9
-$ cat /tmp/hbase-prbpedro-regionserver.pid|xargs kill -9
-$ ./bin/stop-hbase.sh
+9) Stop HBase
+	cat /tmp/hbase-prbpedro-master.pid|xargs kill -9
+	cat /tmp/hbase-prbpedro-regionserver.pid|xargs kill -9
+	stop-hbase.sh
 
 
