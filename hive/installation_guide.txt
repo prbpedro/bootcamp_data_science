@@ -26,7 +26,7 @@
 
 8) Executar o hive
 	hive
-
+	hive --service hiveserver2
 
 
 Ref: https://phoenixnap.com/kb/install-hive-on-ubuntu
