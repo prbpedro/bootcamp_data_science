@@ -2,6 +2,7 @@ package hbase;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.hbase.CompareOperator;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
@@ -17,6 +18,7 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.client.TableDescriptor;
 import org.apache.hadoop.hbase.client.TableDescriptorBuilder;
+import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class HBaseAcessExemple {
@@ -56,7 +58,7 @@ public class HBaseAcessExemple {
 
 		put2.addColumn(Bytes.toBytes(family1), Bytes.toBytes("qual1"), Bytes.toBytes("ValueOneForPut2Qual1"));
 
-		put3.addColumn(Bytes.toBytes(family1), Bytes.toBytes("qual1"), Bytes.toBytes("ValueOneForPut2Qual1"));
+		put3.addColumn(Bytes.toBytes(family1), Bytes.toBytes("qual1"), Bytes.toBytes("ValueOneForPut3Qual1"));
 
 		put1.addColumn(Bytes.toBytes(family2), Bytes.toBytes("qual2"), Bytes.toBytes("ValueOneForPut1Qual2"));
 
@@ -82,6 +84,11 @@ public class HBaseAcessExemple {
 
 		scan.addColumn(Bytes.toBytes(family1), Bytes.toBytes("qual1"));
 		scan.addColumn(Bytes.toBytes(family2), Bytes.toBytes("qual2"));
+
+		SingleColumnValueFilter filter = new SingleColumnValueFilter(Bytes.toBytes(family1), Bytes.toBytes("qual1"),
+				CompareOperator.EQUAL, Bytes.toBytes("ValueOneForPut2Qual1"));
+		
+		scan.setFilter(filter);
 
 		ResultScanner scanner = table.getScanner(scan);
 		for (Result rr = scanner.next(); rr != null; rr = scanner.next()) {
