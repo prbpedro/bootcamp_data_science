@@ -8,8 +8,8 @@ No Hive:
 
 	use dbDesafio;
 
-	create table dadoscovid (dataocorrencia string, siglapais string, descpais string, regiao string, novoscasos int, casosacumulados int, novosobitos int, obitosacumulados int) row format delimited fields terminated by ',' lines terminated by '\\n' STORED AS TEXTFILE location '/Desafio/dbDesafio/DadosCovid/covidData.txt';
-	load data inpath '/Desafio/covidData.txt' into table dbDesafio.dadoscovid;
+	create table dadoscovid (dataocorrencia string, siglapais string, descpais string, regiao string, novoscasos int, casosacumulados int, novosobitos int, obitosacumulados int) row format delimited fields terminated by ',' lines terminated by '\n' STORED AS TEXTFILE;
+	load data inpath '/input/covidData.txt' into table dbDesafio.dadoscovid;
 
 	select count(*) from dadoscovid; 
 		17705
