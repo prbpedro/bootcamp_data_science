@@ -1,0 +1,53 @@
+Para instalar o spark 3 com o hadoop 3.3 é necessário:
+
+1) Instalar o scala 2.12
+	https://www.scala-lang.org/download/2.12.12.html
+
+2) Fazer download do spark e descompactar
+	https://spark.apache.org/downloads.html
+
+3) Ajustar variáveis de ambiente .bashrc
+	#SPARK ENVIRONMENT
+	export SPARK_HOME=/home/prbpedro/Development/apps/spark-3.0.0-bin-hadoop3.2
+	export PATH=$PATH:$SPARK_HOME/bin
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
+	export CLASSPATH=$CLASSPATH:$SPARK_HOME/conf
+
+________________________________Para funcionamento com o HIVE_____________________________
+1) Criar projeto Maven
+	groupId: net.alchim31.maven
+	artifactId: scala-archetype-simple
+
+2) Configurar no pom.xml
+	2.1) Versão do Scala:
+		<scala.version>2.12.12</scala.version>
+		<scala.compat.version>2.12</scala.compat.version>
+		<spec2.version>4.2.0</spec2.version>
+	2.2) Adicionar as dependências:
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_${scala.compat.version}</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_${scala.compat.version}</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-hive_${scala.compat.version}</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<!-- Para o MetaStore do Hive -->
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.14.2.0</version>
+		</dependency>
+
+3) Criar sourceFolder para configuraçã e copiar os arquivos:
+	Hadoop conf: core-site.xml
+	Hadoop conf: hdfs-site.xml
+	Hive conf: hive-site.xml
+	
